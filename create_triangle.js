@@ -2,6 +2,6 @@
 let pattern = process.argv[2];
 let height = +process.argv[3];
 
-let createTriangle = require("./src/patterns_lib.js").createTriangle;
+let generateTriangle = require("./src/patterns_lib.js").generateTriangle;
 
-console.log(createTriangle(pattern,height));
+console.log(generateTriangle(pattern,height));

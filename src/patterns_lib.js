@@ -7,33 +7,38 @@ const line = function(widthOfLine,delimator){
   }
   return rectangleLine;
 }
-const createRectangle = function(pattern,height,width){
+const generateRectangle = function(pattern,width,height){
   let lineNumber = height;
+  let rectangle = "";
+  let delimitor = "";
   if(pattern != "empty"){
     while(height>0){
-      console.log(line(width,"*"));
+      rectangle=rectangle+delimitor+line(width,"*");
       height--;
+      delimitor="\n"
       if(height==0){
-        process.exit();
+        break;
       }
       if(pattern=="alternating"){
-        console.log(line(width,"-"));
+        rectangle=rectangle+delimitor+line(width,"-");
         height--;
       }
     }
   }else {
     while(height>0){
       if(lineNumber==height || height==1){
-        console.log(line(width,"*"));
+        rectangle=rectangle+delimitor+line(width,"*");
       }else {
-        console.log("*"+line(width-2," ")+"*");
+        rectangle= rectangle+delimitor+"*"+line(width-2," ")+"*";
       }
       height--;
+      delimitor="\n";
     }
   }
+  return rectangle;
 }
 
-exports.createRectangle = createRectangle;
+exports.generateRectangle = generateRectangle;
 
 //--------------diamond------------
 const spaceCreator = function(limit){
@@ -102,7 +107,7 @@ const angledPatternCreator = function(noOfLines,symbols){
 }
 
 
-const createDiamond = function(pattern,height){
+const generateDiamond = function(pattern,height){
   if(pattern=="filled"){
     height=Math.ceil(height/2);
     return (filledPatternCreator(height,"*"));
@@ -119,7 +124,7 @@ const createDiamond = function(pattern,height){
   }
 }
 
-exports.createDiamond = createDiamond;
+exports.generateDiamond = generateDiamond;
 
 //--------------triangle-----------
 
@@ -159,7 +164,7 @@ const rightAlignment = function(noOfLines){
   return line;
 }
 
-const createTriangle = function(pattern,height){
+const generateTriangle = function(pattern,height){
   if(pattern=="left"){
     return (leftAlignment(height));
   }
@@ -169,4 +174,4 @@ const createTriangle = function(pattern,height){
   }
 }
 
-exports.createTriangle = createTriangle;
+exports.generateTriangle = generateTriangle;

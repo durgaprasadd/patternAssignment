@@ -2,6 +2,6 @@ let pattern = process.argv[2];
 let width = +process.argv[3];
 let height = +process.argv[4];
 
-let createRectangle = require("./src/patterns_lib.js").createRectangle;
+let generateRectangle = require("./src/patterns_lib.js").generateRectangle;
 
-createRectangle(pattern,height,width)
+console.log(generateRectangle(pattern,width,height));
