@@ -1,0 +1,112 @@
+const generateLine = function(widthOfLine,symbol){
+  let line="";
+  while(widthOfLine > 0){
+    line=line+symbol;
+    widthOfLine--;
+  }
+  return line;
+}
+
+
+const spaceCreator = function(limit){
+  let noOfSpaces = "";
+  while(limit>0){
+    noOfSpaces=noOfSpaces+" ";
+    limit--;
+  }
+  return noOfSpaces;
+}
+
+const filledPatternCreator = function(noOfLines,symbols){
+  let delimiter="";
+  let upperPart ="";
+  let result = "";
+  let lowerPart=upperPart;
+  while(noOfLines>1){
+    spaces = spaceCreator(noOfLines-1);
+    lowerPart = spaces+symbols+delimiter+lowerPart;
+    upperPart=upperPart+delimiter+spaces+symbols;
+    delimiter="\n";
+    symbols="*"+symbols+"*";
+    noOfLines--;
+  }
+  result=upperPart+delimiter+symbols+delimiter+lowerPart;
+  return result;
+}
+
+const hollowPatternCreator = function(noOfLines,symbols){
+  let delimiter="";
+  let upperPart ="";
+  let lowerPart=upperPart;
+  let hollowSpace=" ";
+  let result="";
+  while(noOfLines>1){
+    spaces = spaceCreator(noOfLines-1);
+    lowerPart = spaces+symbols+delimiter+lowerPart;
+    upperPart = upperPart+delimiter+spaces+symbols;
+    delimiter="\n";
+    symbols="*"+hollowSpace+"*";
+    hollowSpace=" "+hollowSpace+" ";
+    noOfLines--;
+  }
+  result=upperPart+delimiter+symbols+delimiter+lowerPart;
+  return result;
+}
+
+
+const angledPatternCreator = function(noOfLines,symbols){
+  let delimiter="";
+  let upperPart = "";
+  let result = "";
+  let lowerPart=upperPart;
+  let middleLine = "*";
+  let hollowSpace=" ";
+  let reverseSymbols="*";
+  while(noOfLines>1){
+    spaces = spaceCreator(noOfLines-1); 
+    lowerPart = spaces+reverseSymbols+delimiter+lowerPart;
+    upperPart = upperPart+delimiter+spaces+symbols;
+    delimiter="\n";
+    middleLine="*"+hollowSpace+"*";
+    symbols="/"+hollowSpace+"\\";
+    reverseSymbols="\\"+hollowSpace+"/"
+    hollowSpace=" "+hollowSpace+" ";
+    noOfLines--;
+  }
+  result=upperPart+delimiter+middleLine+delimiter+lowerPart;
+  return result;
+}
+
+const leftAlignment = function(noOfLines){
+  let triangle="";
+  let delimiter="";
+  let characters="";
+  while(noOfLines>0){
+    characters=characters+"*";
+    triangle=triangle+delimiter+characters;
+    delimiter="\n";
+    noOfLines--;
+  }
+  return triangle;
+}
+
+const rightAlignment = function(noOfLines){
+  let triangle="";
+  let delimiter="";
+  let characters="";
+  while(noOfLines>0){
+    characters=characters+"*";
+    noOfSpaces=spaceCreator(noOfLines-1);
+    triangle=triangle+delimiter+noOfSpaces+characters;
+    delimiter="\n";
+    noOfLines--;
+  }
+  return triangle;
+}
+
+
+module.exports = { 
+  generateLine, spaceCreator, filledPatternCreator,
+  hollowPatternCreator, leftAlignment, rightAlignment, angledPatternCreator
+};
+

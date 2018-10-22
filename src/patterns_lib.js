@@ -1,35 +1,30 @@
+let lib = require("./patterns_util.js");
+
 //-------------rectangle----------------
-const line = function(widthOfLine,delimator){
-  let rectangleLine="";
-  while(widthOfLine > 0){
-    rectangleLine=rectangleLine+delimator;
-    widthOfLine--;
-  }
-  return rectangleLine;
-}
+let generateLine = lib.generateLine;
 const generateRectangle = function(pattern,width,height){
   let lineNumber = height;
   let rectangle = "";
   let delimitor = "";
   if(pattern != "empty"){
     while(height>0){
-      rectangle=rectangle+delimitor+line(width,"*");
+      rectangle=rectangle+delimitor+generateLine(width,"*");
       height--;
       delimitor="\n"
       if(height==0){
         break;
       }
       if(pattern=="alternating"){
-        rectangle=rectangle+delimitor+line(width,"-");
+        rectangle=rectangle+delimitor+generateLine(width,"-");
         height--;
       }
     }
   }else {
     while(height>0){
       if(lineNumber==height || height==1){
-        rectangle=rectangle+delimitor+line(width,"*");
+        rectangle=rectangle+delimitor+generateLine(width,"*");
       }else {
-        rectangle= rectangle+delimitor+"*"+line(width-2," ")+"*";
+        rectangle= rectangle+delimitor+"*"+generateLine(width-2," ")+"*";
       }
       height--;
       delimitor="\n";
@@ -41,70 +36,10 @@ const generateRectangle = function(pattern,width,height){
 exports.generateRectangle = generateRectangle;
 
 //--------------diamond------------
-const spaceCreator = function(limit){
-  let noOfSpaces = "";
-  while(limit>1){
-    noOfSpaces=noOfSpaces+" ";
-    limit--;
-  }
-  return noOfSpaces;
-}
-
-const filledPatternCreator = function(noOfLines,symbols){
-  let delimiter="";
-  let upperPart ="";
-  let lowerPart=upperPart;
-  while(noOfLines>1){
-    spaces = spaceCreator(noOfLines);
-    lowerPart = spaces+symbols+delimiter+lowerPart;
-    upperPart=upperPart+delimiter+spaces+symbols;
-    delimiter="\n";
-    symbols="*"+symbols+"*";
-    noOfLines--;
-  }
-  upperPart=upperPart+delimiter+symbols+delimiter+lowerPart;
-  return upperPart;
-}
-
-const hollowPatternCreator = function(noOfLines,symbols){
-  let delimiter="";
-  let upperPart ="";
-  let lowerPart=upperPart;
-  let hollowSpace=" ";
-  while(noOfLines>1){
-    spaces = spaceCreator(noOfLines);
-    lowerPart = spaces+symbols+delimiter+lowerPart;
-    upperPart = upperPart+delimiter+spaces+symbols;
-    delimiter="\n";
-    symbols="*"+hollowSpace+"*";
-    hollowSpace=" "+hollowSpace+" ";
-    noOfLines--;
-  }
-  upperPart=upperPart+delimiter+symbols+delimiter+lowerPart;
-  return upperPart;
-}
-
-const angledPatternCreator = function(noOfLines,symbols){
-  let delimiter="";
-  let upperPart = "";
-  let lowerPart=upperPart;
-  let middleLine = "*";
-  let hollowSpace=" ";
-  let reverseSymbols="*";
-  while(noOfLines>1){
-    spaces = spaceCreator(noOfLines); 
-    lowerPart = spaces+reverseSymbols+delimiter+lowerPart;
-    upperPart = upperPart+delimiter+spaces+symbols;
-    delimiter="\n";
-    middleLine="*"+hollowSpace+"*";
-    symbols="/"+hollowSpace+"\\";
-    reverseSymbols="\\"+hollowSpace+"/"
-    hollowSpace=" "+hollowSpace+" ";
-    noOfLines--;
-  }
-  upperPart=upperPart+delimiter+middleLine+delimiter+lowerPart;
-  return upperPart;
-}
+let spaceCreator = lib.spaceCreator;
+let filledPatternCreator = lib.filledPatternCreator;
+let hollowPatternCreator = lib.hollowPatternCreator;
+let angledPatternCreator = lib.angledPatternCreator;
 
 
 const generateDiamond = function(pattern,height){
@@ -127,42 +62,10 @@ const generateDiamond = function(pattern,height){
 exports.generateDiamond = generateDiamond;
 
 //--------------triangle-----------
+let leftAlignment = lib.leftAlignment;
+let spaceGenerator = lib.spaceCreator;
+let rightAlignment = lib.rightAlignment;
 
-const leftAlignment = function(noOfLines){
-  let line="";
-  let delimiter="";
-  let characters="";
-  while(noOfLines>0){
-    characters=characters+"*";
-    line=line+delimiter+characters;
-    delimiter="\n";
-    noOfLines--;
-  }
-  return line;
-}
-
-const spaceGenerator = function(limit){
-  let spaces="";
-  while(limit>0){
-    spaces=spaces+" ";
-    limit--;
-  }
-  return spaces;
-}
-
-const rightAlignment = function(noOfLines){
-  let line="";
-  let delimiter="";
-  let characters="";
-  while(noOfLines>0){
-    characters=characters+"*";
-    noOfSpaces=spaceGenerator(noOfLines-1);
-    line=line+delimiter+noOfSpaces+characters;
-    delimiter="\n";
-    noOfLines--;
-  }
-  return line;
-}
 
 const generateTriangle = function(pattern,height){
   if(pattern=="left"){
