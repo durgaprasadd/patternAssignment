@@ -1,20 +1,12 @@
 const generateLine = function(widthOfLine,symbol){
-  let line="";
-  while(widthOfLine > 0){
-    line=line+symbol;
-    widthOfLine--;
-  }
+  let line=new Array(widthOfLine).fill(symbol).join("");
   return line;
 }
 
 
-const spaceCreator = function(limit){
-  let noOfSpaces = "";
-  while(limit>0){
-    noOfSpaces=noOfSpaces+" ";
-    limit--;
-  }
-  return noOfSpaces;
+const spaceCreator = function(range){
+  let Spaces = new Array(range).fill(" ").join("");
+  return Spaces;
 }
 
 const filledPatternCreator = function(noOfLines,symbols){
