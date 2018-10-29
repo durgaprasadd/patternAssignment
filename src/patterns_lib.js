@@ -18,6 +18,32 @@ const generateAlternateRectangle = function(width,height){
   return rectangle.join("\n");
 }
 
+const hollowLinesGenerator = function(height,width){
+  let noOfHollowLines = Math.max(0,height-2);
+  let noOfHollowSpaces = Math.max(0,width-2);
+  let leftBorder = generateLine( 1 % (width+1))("*");
+  let rightBorder = generateLine( 1 % width || 0 )("*");
+  let hollowLine = leftBorder+spaceCreator(noOfHollowSpaces)+rightBorder;
+  let hollowLines = new Array(noOfHollowLines).fill(hollowLine);
+  return hollowLines;
+}
+
+const generateHollowRectangle = function(width,height){
+  let line = generateLine(width)("*");
+  let noOfTopLines = 1 % (height+1);
+  let topLine = new Array(noOfTopLines).fill(line);
+
+  let noOfBottomLines = 1%height || 0;
+  let bottomLine = new Array(noOfBottomLines).fill(line);
+
+  let middlePart = hollowLinesGenerator(height,width); 
+
+  let rectangle = topLine.concat(middlePart,bottomLine);
+
+  return rectangle.join("\n");
+}
+
+
 const generateRectangle = function(pattern,width,height){
   let lineNumber = height;
   let rectangle = "";
@@ -30,15 +56,7 @@ const generateRectangle = function(pattern,width,height){
     rectangle=generateAlternateRectangle(width,height);
     return rectangle;
   }
-  while(height>0){
-    if(lineNumber==height || height==1){
-      rectangle=rectangle+delimitor+generateLine(width)("*");
-      }else {
-        rectangle= rectangle+delimitor+"*"+generateLine(width-2)(" ")+"*";
-      }
-      height--;
-      delimitor="\n";
-    }
+  rectangle = generateHollowRectangle(width,height);
   return rectangle;
 }
 
