@@ -1,6 +1,8 @@
-const generateLine = function(widthOfLine,symbol){
-  let line=new Array(widthOfLine).fill(symbol).join("");
-  return line;
+const generateLine = function(widthOfLine){
+  return function(symbol){
+    let line=new Array(widthOfLine).fill(symbol).join("");
+    return line;
+  }
 }
 
 

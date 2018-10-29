@@ -4,9 +4,9 @@ let lib = require("../src/patterns_util.js");
 //--------generateLine------------
 let generateLine = lib.generateLine;
 
-assert.deepEqual(generateLine(1,"*"),"*");
-assert.deepEqual(generateLine(0,"*"),"");
-assert.deepEqual(generateLine(5,"*"),"*****");
+assert.deepEqual(generateLine(1)("*"),"*");
+assert.deepEqual(generateLine(0)("*"),"");
+assert.deepEqual(generateLine(5)("*"),"*****");
 
 //--------spaceCreator-----------
 let spaceCreator = lib.spaceCreator;
