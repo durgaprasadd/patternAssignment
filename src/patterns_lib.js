@@ -2,10 +2,21 @@ let lib = require("./patterns_util.js");
 
 //-------------rectangle----------------
 let generateLine = lib.generateLine;
+
+const generateFilledRectangle = function(width,height){
+  let line = generateLine(width)("*");
+  let rectangle = new Array(height).fill(line).join("\n");
+  return rectangle;
+}
+
 const generateRectangle = function(pattern,width,height){
   let lineNumber = height;
   let rectangle = "";
   let delimitor = "";
+  if(pattern == "filled"){
+    rectangle = generateFilledRectangle(width,height);
+    return rectangle;
+  }
   if(pattern != "empty"){
     while(height>0){
       rectangle=rectangle+delimitor+generateLine(width)("*");
