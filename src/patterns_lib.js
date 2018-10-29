@@ -2,11 +2,20 @@ let lib = require("./patterns_util.js");
 
 //-------------rectangle----------------
 let generateLine = lib.generateLine;
+let makeCycler = lib.makeCycler;
 
 const generateFilledRectangle = function(width,height){
   let line = generateLine(width)("*");
   let rectangle = new Array(height).fill(line).join("\n");
   return rectangle;
+}
+
+const generateAlternateRectangle = function(width,height){
+  let alternateSymbols = ["*","-"];
+  let alternateLines = alternateSymbols.map(generateLine(width));
+  let noOfLines = new Array(height).fill(1);
+  let rectangle = noOfLines.map(makeCycler(alternateLines));
+  return rectangle.join("\n");
 }
 
 const generateRectangle = function(pattern,width,height){
@@ -17,30 +26,19 @@ const generateRectangle = function(pattern,width,height){
     rectangle = generateFilledRectangle(width,height);
     return rectangle;
   }
-  if(pattern != "empty"){
-    while(height>0){
+  if(pattern=="alternating"){
+    rectangle=generateAlternateRectangle(width,height);
+    return rectangle;
+  }
+  while(height>0){
+    if(lineNumber==height || height==1){
       rectangle=rectangle+delimitor+generateLine(width)("*");
-      height--;
-      delimitor="\n"
-      if(height==0){
-        break;
-      }
-      if(pattern=="alternating"){
-        rectangle=rectangle+delimitor+generateLine(width)("-");
-        height--;
-      }
-    }
-  }else {
-    while(height>0){
-      if(lineNumber==height || height==1){
-        rectangle=rectangle+delimitor+generateLine(width)("*");
       }else {
         rectangle= rectangle+delimitor+"*"+generateLine(width-2)(" ")+"*";
       }
       height--;
       delimitor="\n";
     }
-  }
   return rectangle;
 }
 

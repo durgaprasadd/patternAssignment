@@ -5,10 +5,17 @@ const generateLine = function(widthOfLine){
   }
 }
 
-
 const spaceCreator = function(range){
   let Spaces = new Array(range).fill(" ").join("");
   return Spaces;
+}
+
+const makeCycler = function(list){
+  let index=0;
+  let result = list.slice();
+  return function(){
+    return result[(index++) % result.length];
+  }
 }
 
 const filledPatternCreator = function(noOfLines,symbols){
@@ -100,7 +107,7 @@ const rightAlignment = function(noOfLines){
 
 
 module.exports = { 
-  generateLine, spaceCreator, filledPatternCreator,
+  generateLine, spaceCreator, makeCycler, filledPatternCreator,
   hollowPatternCreator, leftAlignment, rightAlignment, angledPatternCreator
 };
 
