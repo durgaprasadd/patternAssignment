@@ -1,7 +1,6 @@
-let pattern = process.argv[2];
-let width = +process.argv[3];
-let height = +process.argv[4];
-
+let readUserInput = require("./src/patterns_util.js").readUserInput;
 let generateRectangle = require("./src/patterns_lib.js").generateRectangle;
 
-console.log(generateRectangle(pattern,width,height));
+let rectangleDetails = readUserInput(process.argv);
+
+console.log(generateRectangle(rectangleDetails));

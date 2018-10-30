@@ -44,15 +44,15 @@ const generateHollowRectangle = function(width,height){
 }
 
 
-const generateRectangle = function(pattern,width,height){
-  let lineNumber = height;
-  let rectangle = "";
-  let delimitor = "";
-  if(pattern == "filled"){
+const generateRectangle = function(rectangleDetails){
+  let rectangle;
+  let {patternType,width,height} = rectangleDetails;
+
+  if(patternType == "filled"){
     rectangle = generateFilledRectangle(width,height);
     return rectangle;
   }
-  if(pattern=="alternating"){
+  if(patternType =="alternating"){
     rectangle=generateAlternateRectangle(width,height);
     return rectangle;
   }

@@ -4,29 +4,29 @@ let lib = require("../src/patterns_lib.js");
 //----------rectangle--------------
 let generateRectangle = lib.generateRectangle;
 let expectedOutput = "**\n**";
-assert.deepEqual(generateRectangle("filled",2,2),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"filled",width:2,height:2}),expectedOutput);
 expectedOutput = "***\n***";
-assert.deepEqual(generateRectangle("filled",3,2),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"filled",width:3,height:2}),expectedOutput);
 expectedOutput = "**\n**\n**";
-assert.deepEqual(generateRectangle("filled",2,3),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"filled",width:2,height:3}),expectedOutput);
 expectedOutput = "**\n--";
-assert.deepEqual(generateRectangle("alternating",2,2),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"alternating",width:2,height:2}),expectedOutput);
 expectedOutput = "***\n---";
-assert.deepEqual(generateRectangle("alternating",3,2),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"alternating",width:3,height:2}),expectedOutput);
 expectedOutput = "**\n--\n**";
-assert.deepEqual(generateRectangle("alternating",2,3),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"alternating",width:2,height:3}),expectedOutput);
 expectedOutput = "**\n**";
-assert.deepEqual(generateRectangle("empty",2,2),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"empty",width:2,height:2}),expectedOutput);
 expectedOutput = "***\n***";
-assert.deepEqual(generateRectangle("empty",3,2),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"empty",width:3,height:2}),expectedOutput);
 expectedOutput = "**\n**\n**"
-assert.deepEqual(generateRectangle("empty",2,3),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"empty",width:2,height:3}),expectedOutput);
 expectedOutput = new Array(7).fill(new Array(20).fill("*").join("")).join("\n");
-assert.deepEqual(generateRectangle("filled",20,7),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"filled",width:20,height:7}),expectedOutput);
 expectedOutput = "********************\n--------------------\n********************\n--------------------\n********************\n--------------------\n********************";
-assert.deepEqual(generateRectangle("alternating",20,7),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"alternating",width:20,height:7}),expectedOutput);
 expectedOutput = "********************\n*                  *\n*                  *\n*                  *\n*                  *\n*                  *\n********************";
-assert.deepEqual(generateRectangle("empty",20,7),expectedOutput);
+assert.deepEqual(generateRectangle({patternType:"empty",width:20,height:7}),expectedOutput);
 
 
 //---------------diamond-------------

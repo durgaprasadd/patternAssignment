@@ -1,3 +1,10 @@
+const readUserInput = function(userInput){
+  let patternType = userInput[2];
+  let width = +userInput[3];
+  let height = +userInput[4];
+  return {patternType:patternType, width:width, height:height};
+}
+
 const generateLine = function(widthOfLine){
   return function(symbol){
     let line=new Array(widthOfLine).fill(symbol).join("");
@@ -108,6 +115,7 @@ const rightAlignment = function(noOfLines){
 
 module.exports = { 
   generateLine, spaceCreator, makeCycler, filledPatternCreator,
-  hollowPatternCreator, leftAlignment, rightAlignment, angledPatternCreator
+  hollowPatternCreator, leftAlignment, rightAlignment, angledPatternCreator,
+  readUserInput
 };
 
