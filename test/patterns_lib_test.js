@@ -32,29 +32,29 @@ assert.deepEqual(generateRectangle({patternType:"empty",width:20,height:7}),expe
 //---------------diamond-------------
 let generateDiamond = lib.generateDiamond;
 expectedOutput = "    *\n   ***\n  *****\n *******\n*********\n *******\n  *****\n   ***\n    *"
-assert.deepEqual(generateDiamond("filled",10),expectedOutput);
+assert.deepEqual(generateDiamond({patternType:"filled",width:10}),expectedOutput);
 expectedOutput = "  *\n ***\n*****\n ***\n  *";
-assert.deepEqual(generateDiamond("filled",5),expectedOutput);
+assert.deepEqual(generateDiamond({patternType:"filled",width:5}),expectedOutput);
 expectedOutput = "    *\n   * *\n  *   *\n *     *\n*       *\n *     *\n  *   *\n   * *\n    *"
-assert.deepEqual(generateDiamond("hollow",10),expectedOutput);
+assert.deepEqual(generateDiamond({patternType:"hollow",width:10}),expectedOutput);
 expectedOutput = "  *\n * *\n*   *\n * *\n  *";
-assert.deepEqual(generateDiamond("hollow",5),expectedOutput);
+assert.deepEqual(generateDiamond({patternType:"hollow",width:5}),expectedOutput);
 expectedOutput = "     *\n    / \\\n   /   \\\n  /     \\\n /       \\\n*         *\n \\       /\n  \\     /\n   \\   /\n    \\ /\n     *"
-assert.deepEqual(generateDiamond("angled",10),expectedOutput);
+assert.deepEqual(generateDiamond({patternType:"angled",width:10}),expectedOutput);
 expectedOutput ="  *\n / \\\n*   *\n \\ /\n  *";
-assert.deepEqual(generateDiamond("angled",5),expectedOutput);
+assert.deepEqual(generateDiamond({patternType:"angled",width:5}),expectedOutput);
 
 
 //-----------------triangle------------
 let generateTriangle = lib.generateTriangle;
 expectedOutput = "*\n**";
-assert.deepEqual(generateTriangle("left",2),expectedOutput);
+assert.deepEqual(generateTriangle({patternType:"left",width:2}),expectedOutput);
 expectedOutput = "*\n**\n***\n****\n*****";
-assert.deepEqual(generateTriangle("left",5),expectedOutput);
+assert.deepEqual(generateTriangle({patternType:"left",width:5}),expectedOutput);
 expectedOutput = " *\n**"
-assert.deepEqual(generateTriangle("right",2),expectedOutput);
+assert.deepEqual(generateTriangle({patternType:"right",width:2}),expectedOutput);
 expectedOutput = "    *\n   **\n  ***\n ****\n*****"
-assert.deepEqual(generateTriangle("right",5),expectedOutput);
+assert.deepEqual(generateTriangle({patternType:"right",width:5}),expectedOutput);
 
 
 console.log("all tests are passed!");

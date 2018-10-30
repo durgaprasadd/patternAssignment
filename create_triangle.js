@@ -1,7 +1,5 @@
-
-let pattern = process.argv[2];
-let height = +process.argv[3];
-
+let readUserInput = require("./src/patterns_util.js").readUserInput;
 let generateTriangle = require("./src/patterns_lib.js").generateTriangle;
 
-console.log(generateTriangle(pattern,height));
+let triangleDetails = readUserInput(process.argv);
+console.log(generateTriangle(triangleDetails));

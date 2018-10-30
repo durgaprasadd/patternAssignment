@@ -1,6 +1,5 @@
-let pattern = process.argv[2];
-let height = +process.argv[3];
-
+let readUserInput = require("./src/patterns_util.js").readUserInput;
 let generateDiamond = require("./src/patterns_lib.js").generateDiamond;
 
-console.log(generateDiamond(pattern,height));
+let diamondDetails = readUserInput(process.argv);
+console.log(generateDiamond(diamondDetails));

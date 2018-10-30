@@ -69,7 +69,9 @@ let hollowPatternCreator = lib.hollowPatternCreator;
 let angledPatternCreator = lib.angledPatternCreator;
 
 
-const generateDiamond = function(pattern,height){
+const generateDiamond = function(diamondDetails){
+  let pattern = diamondDetails.patternType;
+  let height = diamondDetails.width;
   if(pattern=="filled"){
     height=Math.ceil(height/2);
     return (filledPatternCreator(height,"*"));
@@ -94,7 +96,9 @@ let spaceGenerator = lib.spaceCreator;
 let rightAlignment = lib.rightAlignment;
 
 
-const generateTriangle = function(pattern,height){
+const generateTriangle = function(triangleDetails){
+  let pattern = triangleDetails.patternType;
+  let height = triangleDetails.width;
   if(pattern=="left"){
     return (leftAlignment(height));
   }
