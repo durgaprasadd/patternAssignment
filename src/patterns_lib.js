@@ -45,28 +45,76 @@ const generateHollowRectangle = function(width,height){
 
 
 const generateRectangle = function(rectangleDetails){
-  let rectangle;
   let {patternType,width,height} = rectangleDetails;
-
-  if(patternType == "filled"){
-    rectangle = generateFilledRectangle(width,height);
-    return rectangle;
-  }
-  if(patternType =="alternating"){
-    rectangle=generateAlternateRectangle(width,height);
-    return rectangle;
-  }
-  rectangle = generateHollowRectangle(width,height);
+  let rectangleFunctions = { filled:generateFilledRectangle, alternating:generateAlternateRectangle,
+    empty:generateHollowRectangle}
+  let rectangle = rectangleFunctions[patternType](width,height);
   return rectangle;
 }
 
-exports.generateRectangle = generateRectangle;
 
 //--------------diamond------------
 let spaceCreator = lib.spaceCreator;
-let filledPatternCreator = lib.filledPatternCreator;
-let hollowPatternCreator = lib.hollowPatternCreator;
-let angledPatternCreator = lib.angledPatternCreator;
+
+const filledPatternCreator = function(noOfLines,symbols){
+  let delimiter="";
+  let upperPart ="";
+  let result = "";
+  let lowerPart=upperPart;
+  while(noOfLines>1){
+    spaces = spaceCreator(noOfLines-1);
+    lowerPart = spaces+symbols+delimiter+lowerPart;
+    upperPart=upperPart+delimiter+spaces+symbols;
+    delimiter="\n";
+    symbols="*"+symbols+"*";
+    noOfLines--;
+  }
+  result=upperPart+delimiter+symbols+delimiter+lowerPart;
+  return result;
+}
+
+const hollowPatternCreator = function(noOfLines,symbols){
+  let delimiter="";
+  let upperPart ="";
+  let lowerPart=upperPart;
+  let hollowSpace=" ";
+  let result="";
+  while(noOfLines>1){
+    spaces = spaceCreator(noOfLines-1);
+    lowerPart = spaces+symbols+delimiter+lowerPart;
+    upperPart = upperPart+delimiter+spaces+symbols;
+    delimiter="\n";
+    symbols="*"+hollowSpace+"*";
+    hollowSpace=" "+hollowSpace+" ";
+    noOfLines--;
+  }
+  result=upperPart+delimiter+symbols+delimiter+lowerPart;
+  return result;
+}
+
+
+const angledPatternCreator = function(noOfLines,symbols){
+  let delimiter="";
+  let upperPart = "";
+  let result = "";
+  let lowerPart=upperPart;
+  let middleLine = "*";
+  let hollowSpace=" ";
+  let reverseSymbols="*";
+  while(noOfLines>1){
+    spaces = spaceCreator(noOfLines-1); 
+    lowerPart = spaces+reverseSymbols+delimiter+lowerPart;
+    upperPart = upperPart+delimiter+spaces+symbols;
+    delimiter="\n";
+    middleLine="*"+hollowSpace+"*";
+    symbols="/"+hollowSpace+"\\";
+    reverseSymbols="\\"+hollowSpace+"/"
+    hollowSpace=" "+hollowSpace+" ";
+    noOfLines--;
+  }
+  result=upperPart+delimiter+middleLine+delimiter+lowerPart;
+  return result;
+}
 
 
 const generateDiamond = function(diamondDetails){
@@ -88,12 +136,35 @@ const generateDiamond = function(diamondDetails){
   }
 }
 
-exports.generateDiamond = generateDiamond;
 
 //--------------triangle-----------
-let leftAlignment = lib.leftAlignment;
-let spaceGenerator = lib.spaceCreator;
-let rightAlignment = lib.rightAlignment;
+
+const leftAlignment = function(noOfLines){
+  let triangle="";
+  let delimiter="";
+  let characters="";
+  while(noOfLines>0){
+    characters=characters+"*";
+    triangle=triangle+delimiter+characters;
+    delimiter="\n";
+    noOfLines--;
+  }
+  return triangle;
+}
+
+const rightAlignment = function(noOfLines){
+  let triangle="";
+  let delimiter="";
+  let characters="";
+  while(noOfLines>0){
+    characters=characters+"*";
+    noOfSpaces=spaceCreator(noOfLines-1);
+    triangle=triangle+delimiter+noOfSpaces+characters;
+    delimiter="\n";
+    noOfLines--;
+  }
+  return triangle;
+}
 
 
 const generateTriangle = function(triangleDetails){
@@ -108,4 +179,7 @@ const generateTriangle = function(triangleDetails){
   }
 }
 
-exports.generateTriangle = generateTriangle;
+module.exports = { generateFilledRectangle, generateAlternateRectangle, generateHollowRectangle,
+  generateDiamond, generateTriangle, generateRectangle, leftAlignment, rightAlignment,
+  filledPatternCreator, hollowPatternCreator, angledPatternCreator
+}
