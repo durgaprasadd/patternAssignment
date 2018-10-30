@@ -15,4 +15,10 @@ assert.deepEqual(spaceCreator(0),"");
 assert.deepEqual(spaceCreator(1)," ");
 assert.deepEqual(spaceCreator(5),"     ");
 
+//----------generateOddSeries--------
+let generateOddSeries = lib.generateOddSeries;
+
+assert.deepEqual([].reduce(generateOddSeries,[]),[]);
+assert.deepEqual([1].reduce(generateOddSeries,[]),[1]);
+assert.deepEqual([1,1].reduce(generateOddSeries,[]),[1,3]);
 console.log("all tests are passed!");

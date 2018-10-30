@@ -5,14 +5,13 @@ let generateLine = lib.generateLine;
 let makeCycler = lib.makeCycler;
 
 const generateFilledRectangle = function(width,height){
-  let line = generateLine(width)("*");
+  let line = generateLine("*")(width);
   let rectangle = new Array(height).fill(line).join("\n");
   return rectangle;
 }
 
 const generateAlternateRectangle = function(width,height){
-  let alternateSymbols = ["*","-"];
-  let alternateLines = alternateSymbols.map(generateLine(width));
+  let alternateLines = [generateLine("*")(width),generateLine("-")(width)];
   let noOfLines = new Array(height).fill(1);
   let rectangle = noOfLines.map(makeCycler(alternateLines));
   return rectangle.join("\n");
@@ -21,15 +20,15 @@ const generateAlternateRectangle = function(width,height){
 const hollowLinesGenerator = function(height,width){
   let noOfHollowLines = Math.max(0,height-2);
   let noOfHollowSpaces = Math.max(0,width-2);
-  let leftBorder = generateLine( 1 % (width+1))("*");
-  let rightBorder = generateLine( 1 % width || 0 )("*");
+  let leftBorder = generateLine("*")( 1 % (width+1))
+  let rightBorder = generateLine("*")( 1 % width || 0 );
   let hollowLine = leftBorder+spaceCreator(noOfHollowSpaces)+rightBorder;
   let hollowLines = new Array(noOfHollowLines).fill(hollowLine);
   return hollowLines;
 }
 
 const generateHollowRectangle = function(width,height){
-  let line = generateLine(width)("*");
+  let line = generateLine("*")(width);
   let noOfTopLines = 1 % (height+1);
   let topLine = new Array(noOfTopLines).fill(line);
 
@@ -55,24 +54,33 @@ const generateRectangle = function(rectangleDetails){
 
 //--------------diamond------------
 let spaceCreator = lib.spaceCreator;
+let generateOddSeries = lib.generateOddSeries;
 
-const filledPatternCreator = function(height,symbols){
-  let noOfLines = Math.ceil(height/2);
-  let delimiter="";
-  let upperPart ="";
-  let result = "";
-  let lowerPart=upperPart;
-  while(noOfLines>1){
-    spaces = spaceCreator(noOfLines-1);
-    lowerPart = spaces+symbols+delimiter+lowerPart;
-    upperPart=upperPart+delimiter+spaces+symbols;
-    delimiter="\n";
-    symbols="*"+symbols+"*";
-    noOfLines--;
+const countSpaces = function(limit){
+  return function(element){
+    return (limit-element)/2;
   }
-  result=upperPart+delimiter+symbols+delimiter+lowerPart;
-  return result;
 }
+
+const zip = function(list){
+  let index=0;
+  return function(element){
+    return list[index++]+element;
+  }
+}
+
+const filledPatternCreator = function(height){
+  height = Math.ceil(height/2);
+  let ones = new Array(height).fill(1);
+  let oddSeries = ones.reduce(generateOddSeries,[]);
+  let reversedSeries = oddSeries.slice(0,oddSeries.length-1).reverse();
+  let diamondSeries = oddSeries.concat(reversedSeries);
+  let noOfSpaces = diamondSeries.map(countSpaces(oddSeries[oddSeries.length-1]));
+  let diamondSpaces = noOfSpaces.map(spaceCreator);
+  let diamondStars = diamondSeries.map(generateLine("*"));
+  return diamondStars.map(zip(diamondSpaces)).join("\n");
+}
+
 
 const hollowPatternCreator = function(height,symbols){
   let noOfLines = Math.ceil(height/2);

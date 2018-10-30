@@ -5,8 +5,8 @@ const readUserInput = function(userInput){
   return {patternType:patternType, width:width, height:height};
 }
 
-const generateLine = function(widthOfLine){
-  return function(symbol){
+const generateLine = function(symbol){
+  return function(widthOfLine){
     let line=new Array(widthOfLine).fill(symbol).join("");
     return line;
   }
@@ -25,8 +25,12 @@ const makeCycler = function(list){
   }
 }
 
+const generateOddSeries = function(series,element){
+  series.push(2*series.length+element);
+  return series;
+}
 
 module.exports = { 
-  generateLine, spaceCreator, makeCycler, readUserInput
+  generateLine, spaceCreator, makeCycler, readUserInput, generateOddSeries
 };
 
