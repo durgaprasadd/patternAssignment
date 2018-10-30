@@ -56,7 +56,8 @@ const generateRectangle = function(rectangleDetails){
 //--------------diamond------------
 let spaceCreator = lib.spaceCreator;
 
-const filledPatternCreator = function(noOfLines,symbols){
+const filledPatternCreator = function(height,symbols){
+  let noOfLines = Math.ceil(height/2);
   let delimiter="";
   let upperPart ="";
   let result = "";
@@ -73,7 +74,8 @@ const filledPatternCreator = function(noOfLines,symbols){
   return result;
 }
 
-const hollowPatternCreator = function(noOfLines,symbols){
+const hollowPatternCreator = function(height,symbols){
+  let noOfLines = Math.ceil(height/2);
   let delimiter="";
   let upperPart ="";
   let lowerPart=upperPart;
@@ -93,7 +95,8 @@ const hollowPatternCreator = function(noOfLines,symbols){
 }
 
 
-const angledPatternCreator = function(noOfLines,symbols){
+const angledPatternCreator = function(height,symbols){
+  let noOfLines = Math.floor(height/2)+1;
   let delimiter="";
   let upperPart = "";
   let result = "";
@@ -120,20 +123,10 @@ const angledPatternCreator = function(noOfLines,symbols){
 const generateDiamond = function(diamondDetails){
   let pattern = diamondDetails.patternType;
   let height = diamondDetails.width;
-  if(pattern=="filled"){
-    height=Math.ceil(height/2);
-    return (filledPatternCreator(height,"*"));
-  }
-
-  if(pattern=="hollow"){
-    height=Math.ceil(height/2);
-    return (hollowPatternCreator(height,"*"));
-  }
-
-  if(pattern=="angled"){
-    height=Math.floor(height/2)+1
-    return (angledPatternCreator(height,"*"));
-  }
+  let diamondFunctions = {filled:filledPatternCreator, hollow:hollowPatternCreator,
+    angled:angledPatternCreator}
+  let diamond = diamondFunctions[pattern](height,"*");
+  return diamond;
 }
 
 
@@ -170,13 +163,9 @@ const rightAlignment = function(noOfLines){
 const generateTriangle = function(triangleDetails){
   let pattern = triangleDetails.patternType;
   let height = triangleDetails.width;
-  if(pattern=="left"){
-    return (leftAlignment(height));
-  }
-
-  if(pattern=="right"){
-    return (rightAlignment(height));
-  }
+  let triangleFunctions = {right:rightAlignment, left:leftAlignment};
+  let triangle = triangleFunctions[pattern](height);
+  return triangle;
 }
 
 module.exports = { generateFilledRectangle, generateAlternateRectangle, generateHollowRectangle,

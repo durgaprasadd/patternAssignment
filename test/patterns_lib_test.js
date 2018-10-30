@@ -61,22 +61,22 @@ let filledPatternCreator = lib.filledPatternCreator;
 
 assert.deepEqual(filledPatternCreator(1,"*"),"*");
 assert.deepEqual(filledPatternCreator(0,"*"),"*");
-assert.deepEqual(filledPatternCreator(2,"*")," *\n***\n *");
+assert.deepEqual(filledPatternCreator(4,"*")," *\n***\n *");
 
 //---------hollowPatternCreator-------
 let hollowPatternCreator = lib.hollowPatternCreator;
 
 assert.deepEqual(hollowPatternCreator(0,"*"),"*");
 assert.deepEqual(hollowPatternCreator(1,"*"),"*");
-assert.deepEqual(hollowPatternCreator(2,"*")," *\n* *\n *");
+assert.deepEqual(hollowPatternCreator(4,"*")," *\n* *\n *");
 
 //------------angledPatternCreator---------
 let angledPatternCreator = lib.angledPatternCreator;
 
 assert.deepEqual(angledPatternCreator(0,"*"),"*");
 assert.deepEqual(angledPatternCreator(1,"*"),"*");
-assert.deepEqual(angledPatternCreator(2,"*")," *\n* *\n *");
-assert.deepEqual(angledPatternCreator(3,"*"),"  *\n / \\\n*   *\n \\ /\n  *");
+assert.deepEqual(angledPatternCreator(3,"*")," *\n* *\n *");
+assert.deepEqual(angledPatternCreator(5,"*"),"  *\n / \\\n*   *\n \\ /\n  *");
 
 
 //-------------leftAlignment--------------
