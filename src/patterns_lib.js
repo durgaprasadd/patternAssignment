@@ -98,37 +98,24 @@ const hollowPatternCreator = function(height){
   return diamond.map(joinSpaces(height)).join("\n");
 }
 
-const angledPatternCreator = function(height,symbols){
-  let noOfLines = Math.floor(height/2)+1;
-  let delimiter="";
-  let upperPart = "";
-  let result = "";
-  let lowerPart=upperPart;
-  let middleLine = "*";
-  let hollowSpace=" ";
-  let reverseSymbols="*";
-  while(noOfLines>1){
-    spaces = spaceCreator(noOfLines-1); 
-    lowerPart = spaces+reverseSymbols+delimiter+lowerPart;
-    upperPart = upperPart+delimiter+spaces+symbols;
-    delimiter="\n";
-    middleLine="*"+hollowSpace+"*";
-    symbols="/"+hollowSpace+"\\";
-    reverseSymbols="\\"+hollowSpace+"/"
-    hollowSpace=" "+hollowSpace+" ";
-    noOfLines--;
-  }
-  result=upperPart+delimiter+middleLine+delimiter+lowerPart;
-  return result;
+const angledPatternCreator = function(height){
+  height = Math.ceil(height/2)*2-1;
+  let topline = createTopLineOfDiamond(height);
+  let middleLine = createMiddleLineOfDiamond(height);
+  let bottomline = createBottomLineOfDiamond(height);
+  let upperHalf = createUpperHalf("/","\\",height);
+  let lowerHalf = createLowerHalf("/","\\",height);
+  let diamond = topline.concat(upperHalf,middleLine,lowerHalf,bottomline);
+  return diamond.map(joinSpaces(height)).join("\n");
 }
-
+  
 
 const generateDiamond = function(diamondDetails){
   let pattern = diamondDetails.patternType;
   let height = diamondDetails.width;
   let diamondFunctions = {filled:filledPatternCreator, hollow:hollowPatternCreator,
     angled:angledPatternCreator}
-  let diamond = diamondFunctions[pattern](height,"*");
+  let diamond = diamondFunctions[pattern](height);
   return diamond;
 }
 

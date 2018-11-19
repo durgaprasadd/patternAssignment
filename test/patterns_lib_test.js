@@ -39,9 +39,9 @@ expectedOutput = "    *    \n   * *   \n  *   *  \n *     * \n*       *\n *     
 assert.deepEqual(generateDiamond({patternType:"hollow",width:10}),expectedOutput);
 expectedOutput = "  *  \n * * \n*   *\n * * \n  *  ";
 assert.deepEqual(generateDiamond({patternType:"hollow",width:5}),expectedOutput);
-expectedOutput = "     *\n    / \\\n   /   \\\n  /     \\\n /       \\\n*         *\n \\       /\n  \\     /\n   \\   /\n    \\ /\n     *"
+expectedOutput = "    *    \n   / \\   \n  /   \\  \n /     \\ \n*       *\n \\     / \n  \\   /  \n   \\ /   \n    *    "
 assert.deepEqual(generateDiamond({patternType:"angled",width:10}),expectedOutput);
-expectedOutput ="  *\n / \\\n*   *\n \\ /\n  *";
+expectedOutput ="  *  \n / \\ \n*   *\n \\ / \n  *  ";
 assert.deepEqual(generateDiamond({patternType:"angled",width:5}),expectedOutput);
 
 
@@ -73,10 +73,10 @@ assert.deepEqual(hollowPatternCreator(4,"*")," * \n* *\n * ");
 //------------angledPatternCreator---------
 let angledPatternCreator = lib.angledPatternCreator;
 
-assert.deepEqual(angledPatternCreator(0,"*"),"*");
+assert.deepEqual(angledPatternCreator(0,"*"),"");
 assert.deepEqual(angledPatternCreator(1,"*"),"*");
-assert.deepEqual(angledPatternCreator(3,"*")," *\n* *\n *");
-assert.deepEqual(angledPatternCreator(5,"*"),"  *\n / \\\n*   *\n \\ /\n  *");
+assert.deepEqual(angledPatternCreator(3,"*")," * \n* *\n * ");
+assert.deepEqual(angledPatternCreator(5,"*"),"  *  \n / \\ \n*   *\n \\ / \n  *  ");
 
 
 //-------------leftAlignment--------------
