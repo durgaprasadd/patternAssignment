@@ -55,6 +55,12 @@ const generateRectangle = function(rectangleDetails){
 //--------------diamond------------
 let spaceCreator = lib.spaceCreator;
 let generateOddSeries = lib.generateOddSeries;
+let createTopLineOfDiamond = lib.createTopLineOfDiamond;
+let createMiddleLineOfDiamond = lib.createMiddleLineOfDiamond;
+let createBottomLineOfDiamond = lib.createBottomLineOfDiamond;
+let createUpperHalf = lib.createUpperHalfOfDiamond;
+let createLowerHalf = lib.createLowerHalfOfDiamond;
+let joinSpaces = lib.joinSpaces;
 
 const countSpaces = function(limit){
   return function(element){
@@ -81,27 +87,16 @@ const filledPatternCreator = function(height){
   return diamondStars.map(zip(diamondSpaces)).join("\n");
 }
 
-
-const hollowPatternCreator = function(height,symbols){
-  let noOfLines = Math.ceil(height/2);
-  let delimiter="";
-  let upperPart ="";
-  let lowerPart=upperPart;
-  let hollowSpace=" ";
-  let result="";
-  while(noOfLines>1){
-    spaces = spaceCreator(noOfLines-1);
-    lowerPart = spaces+symbols+delimiter+lowerPart;
-    upperPart = upperPart+delimiter+spaces+symbols;
-    delimiter="\n";
-    symbols="*"+hollowSpace+"*";
-    hollowSpace=" "+hollowSpace+" ";
-    noOfLines--;
-  }
-  result=upperPart+delimiter+symbols+delimiter+lowerPart;
-  return result;
+const hollowPatternCreator = function(height){
+  height = Math.ceil(height/2)*2-1;
+  let topline = createTopLineOfDiamond(height);
+  let middleLine = createMiddleLineOfDiamond(height);
+  let bottomline = createBottomLineOfDiamond(height);
+  let upperHalf = createUpperHalf("*","*",height);
+  let lowerHalf = createLowerHalf("*","*",height);
+  let diamond = topline.concat(upperHalf,middleLine,lowerHalf,bottomline);
+  return diamond.map(joinSpaces(height)).join("\n");
 }
-
 
 const angledPatternCreator = function(height,symbols){
   let noOfLines = Math.floor(height/2)+1;

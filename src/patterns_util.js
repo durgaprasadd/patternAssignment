@@ -30,7 +30,60 @@ const generateOddSeries = function(series,element){
   return series;
 }
 
+const createTopLineOfDiamond = function(height){
+  if(height>0){
+    return ["*"];
+  }
+  return [];
+}
+
+const createBottomLineOfDiamond = function(height){
+  if(height>1){
+    return ["*"];
+  }
+  return [];
+}
+
+const createMiddleLineOfDiamond = function(height){
+  if(height>2){
+    return ["*"+spaceCreator(height-2)+"*"];
+  }
+  return [];
+}
+
+const joinSpaces = function(height){
+  return function(element){
+    return spaceCreator((height-element.length)/2)+element+spaceCreator((height-element.length)/2);
+  }
+}
+
+const concatfirstAndLastSymbols = function(firstSymbol,lastSymbol){
+  return function(width){
+    return firstSymbol+spaceCreator(width)+lastSymbol;
+  }
+}
+
+const createUpperHalfOfDiamond = function(firstSymbol,lastSymbol,height){
+  let width = Math.max(0,(height-3)/2);
+  let ones = new Array(width).fill(1);
+  let oddSeries = ones.reduce(generateOddSeries,[]);
+  let upperHalf = oddSeries.map(concatfirstAndLastSymbols(firstSymbol,lastSymbol));
+  return upperHalf;
+}
+
+const reverseString = function(string){
+  return string.split("").reverse().join("");
+}
+
+const createLowerHalfOfDiamond = function(firstSymbol,lastSymbol,height){
+  return createUpperHalfOfDiamond(firstSymbol,lastSymbol,height).reverse().map(reverseString);
+}
+
+
+
+
 module.exports = { 
-  generateLine, spaceCreator, makeCycler, readUserInput, generateOddSeries
+  generateLine, spaceCreator, makeCycler, readUserInput, generateOddSeries, createTopLineOfDiamond, createBottomLineOfDiamond,
+  createUpperHalfOfDiamond, createLowerHalfOfDiamond, createMiddleLineOfDiamond, joinSpaces, reverseString
 };
 
