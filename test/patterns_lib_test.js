@@ -82,16 +82,16 @@ assert.deepEqual(angledPatternCreator(5,"*"),"  *  \n / \\ \n*   *\n \\ / \n  * 
 //-------------leftAlignment--------------
 let leftAlignment = lib.leftAlignment;
 
-assert.deepEqual(leftAlignment(0,"*"),"");
-assert.deepEqual(leftAlignment(1,"*"),"*");
-assert.deepEqual(leftAlignment(2,"*"),"* \n**");
+assert.deepEqual(leftAlignment(0),[]);
+assert.deepEqual(leftAlignment(1),["*"]);
+assert.deepEqual(leftAlignment(2),["* ","**"]);
 
 //-------------rightAlignment-------------
 let rightAlignment = lib.rightAlignment;
 
-assert.deepEqual(rightAlignment(0,"*"),"");
-assert.deepEqual(rightAlignment(1,"*"),"*");
-assert.deepEqual(rightAlignment(2,"*")," *\n**");
+assert.deepEqual(rightAlignment(0),[]);
+assert.deepEqual(rightAlignment(1),["*"]);
+assert.deepEqual(rightAlignment(2),[" *","**"]);
 
 
 console.log("all tests are passed!");

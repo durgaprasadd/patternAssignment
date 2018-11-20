@@ -123,26 +123,18 @@ const generateDiamond = function(diamondDetails){
 //--------------triangle-----------
 let makeCounter = lib.makeCounter;
 let createTriangle = lib.createTriangle;
+let reverseString = lib.reverseString;
 
 const leftAlignment = function(height){
   let ones = new Array(height).fill(1);
   let series = ones.map(makeCounter(1));
   let triangle = series.map(createTriangle(height));
-  return triangle.join("\n");
+  return triangle;
 }
 
-const rightAlignment = function(noOfLines){
-  let triangle="";
-  let delimiter="";
-  let characters="";
-  while(noOfLines>0){
-    characters=characters+"*";
-    noOfSpaces=spaceCreator(noOfLines-1);
-    triangle=triangle+delimiter+noOfSpaces+characters;
-    delimiter="\n";
-    noOfLines--;
-  }
-  return triangle;
+const rightAlignment = function(height){
+  let triangle = leftAlignment(height);
+  return triangle.map(reverseString);
 }
 
 
@@ -151,7 +143,7 @@ const generateTriangle = function(triangleDetails){
   let height = triangleDetails.width;
   let triangleFunctions = {right:rightAlignment, left:leftAlignment};
   let triangle = triangleFunctions[pattern](height);
-  return triangle;
+  return triangle.join("\n");
 }
 
 module.exports = { generateFilledRectangle, generateAlternateRectangle, generateHollowRectangle,
