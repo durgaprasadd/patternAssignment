@@ -62,29 +62,15 @@ let createUpperHalf = lib.createUpperHalfOfDiamond;
 let createLowerHalf = lib.createLowerHalfOfDiamond;
 let joinSpaces = lib.joinSpaces;
 
-const countSpaces = function(limit){
-  return function(element){
-    return (limit-element)/2;
-  }
-}
-
-const zip = function(list){
-  let index=0;
-  return function(element){
-    return list[index++]+element;
-  }
-}
-
 const filledPatternCreator = function(height){
-  height = Math.ceil(height/2);
-  let ones = new Array(height).fill(1);
+  let width = Math.ceil(height/2);
+  height = width*2-1;
+  let ones = new Array(width).fill(1);
   let oddSeries = ones.reduce(generateOddSeries,[]);
   let reversedSeries = oddSeries.slice(0,oddSeries.length-1).reverse();
   let diamondSeries = oddSeries.concat(reversedSeries);
-  let noOfSpaces = diamondSeries.map(countSpaces(oddSeries[oddSeries.length-1]));
-  let diamondSpaces = noOfSpaces.map(spaceCreator);
   let diamondStars = diamondSeries.map(generateLine("*"));
-  return diamondStars.map(zip(diamondSpaces)).join("\n");
+  return diamondStars.map(joinSpaces(height)).join("\n");
 }
 
 const hollowPatternCreator = function(height){

@@ -31,9 +31,9 @@ assert.deepEqual(generateRectangle({patternType:"empty",width:20,height:7}),expe
 
 //---------------diamond-------------
 let generateDiamond = lib.generateDiamond;
-expectedOutput = "    *\n   ***\n  *****\n *******\n*********\n *******\n  *****\n   ***\n    *"
+expectedOutput = "    *    \n   ***   \n  *****  \n ******* \n*********\n ******* \n  *****  \n   ***   \n    *    "
 assert.deepEqual(generateDiamond({patternType:"filled",width:10}),expectedOutput);
-expectedOutput = "  *\n ***\n*****\n ***\n  *";
+expectedOutput = "  *  \n *** \n*****\n *** \n  *  ";
 assert.deepEqual(generateDiamond({patternType:"filled",width:5}),expectedOutput);
 expectedOutput = "    *    \n   * *   \n  *   *  \n *     * \n*       *\n *     * \n  *   *  \n   * *   \n    *    "
 assert.deepEqual(generateDiamond({patternType:"hollow",width:10}),expectedOutput);
@@ -60,8 +60,8 @@ assert.deepEqual(generateTriangle({patternType:"right",width:5}),expectedOutput)
 let filledPatternCreator = lib.filledPatternCreator;
 
 assert.deepEqual(filledPatternCreator(1,"*"),"*");
-assert.deepEqual(filledPatternCreator(3,"*")," *\n***\n *");
-assert.deepEqual(filledPatternCreator(4,"*")," *\n***\n *");
+assert.deepEqual(filledPatternCreator(3,"*")," * \n***\n * ");
+assert.deepEqual(filledPatternCreator(4,"*")," * \n***\n * ");
 
 //---------hollowPatternCreator-------
 let hollowPatternCreator = lib.hollowPatternCreator;
