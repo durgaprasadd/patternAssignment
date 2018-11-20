@@ -30,6 +30,12 @@ const generateOddSeries = function(series,element){
   return series;
 }
 
+const makeCounter = function(count){
+  return function(){
+    return count++;
+  }
+}
+
 const createTopLineOfDiamond = function(height){
   if(height>0){
     return ["*"];
@@ -79,11 +85,17 @@ const createLowerHalfOfDiamond = function(firstSymbol,lastSymbol,height){
   return createUpperHalfOfDiamond(firstSymbol,lastSymbol,height).reverse().map(reverseString);
 }
 
+const createTriangle = function(height){
+  return function(element){
+    return generateLine("*")(element)+spaceCreator(height-element);
+  }
+}
 
 
 
 module.exports = { 
   generateLine, spaceCreator, makeCycler, readUserInput, generateOddSeries, createTopLineOfDiamond, createBottomLineOfDiamond,
-  createUpperHalfOfDiamond, createLowerHalfOfDiamond, createMiddleLineOfDiamond, joinSpaces, reverseString
+  createUpperHalfOfDiamond, createLowerHalfOfDiamond, createMiddleLineOfDiamond, joinSpaces, reverseString, makeCounter,
+  createTriangle
 };
 

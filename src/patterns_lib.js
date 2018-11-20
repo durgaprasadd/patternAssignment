@@ -121,18 +121,14 @@ const generateDiamond = function(diamondDetails){
 
 
 //--------------triangle-----------
+let makeCounter = lib.makeCounter;
+let createTriangle = lib.createTriangle;
 
-const leftAlignment = function(noOfLines){
-  let triangle="";
-  let delimiter="";
-  let characters="";
-  while(noOfLines>0){
-    characters=characters+"*";
-    triangle=triangle+delimiter+characters;
-    delimiter="\n";
-    noOfLines--;
-  }
-  return triangle;
+const leftAlignment = function(height){
+  let ones = new Array(height).fill(1);
+  let series = ones.map(makeCounter(1));
+  let triangle = series.map(createTriangle(height));
+  return triangle.join("\n");
 }
 
 const rightAlignment = function(noOfLines){

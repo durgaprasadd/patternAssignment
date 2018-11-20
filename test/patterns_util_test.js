@@ -22,6 +22,15 @@ assert.deepEqual([].reduce(generateOddSeries,[]),[]);
 assert.deepEqual([1].reduce(generateOddSeries,[]),[1]);
 assert.deepEqual([1,1].reduce(generateOddSeries,[]),[1,3]);
 
+//-----------makeCounter--------------
+let makeCounter = lib.makeCounter;
+let countFromOne = makeCounter(1);
+
+assert.deepEqual(countFromOne(),1);
+assert.deepEqual(countFromOne(),2);
+assert.deepEqual(countFromOne(),3);
+
+
 //--------------createTopLineOfDiamond----------
 let createTopLineOfDiamond = lib.createTopLineOfDiamond;
 

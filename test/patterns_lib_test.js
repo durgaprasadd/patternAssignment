@@ -47,9 +47,9 @@ assert.deepEqual(generateDiamond({patternType:"angled",width:5}),expectedOutput)
 
 //-----------------triangle------------
 let generateTriangle = lib.generateTriangle;
-expectedOutput = "*\n**";
+expectedOutput = "* \n**";
 assert.deepEqual(generateTriangle({patternType:"left",width:2}),expectedOutput);
-expectedOutput = "*\n**\n***\n****\n*****";
+expectedOutput = "*    \n**   \n***  \n**** \n*****";
 assert.deepEqual(generateTriangle({patternType:"left",width:5}),expectedOutput);
 expectedOutput = " *\n**"
 assert.deepEqual(generateTriangle({patternType:"right",width:2}),expectedOutput);
@@ -84,7 +84,7 @@ let leftAlignment = lib.leftAlignment;
 
 assert.deepEqual(leftAlignment(0,"*"),"");
 assert.deepEqual(leftAlignment(1,"*"),"*");
-assert.deepEqual(leftAlignment(2,"*"),"*\n**");
+assert.deepEqual(leftAlignment(2,"*"),"* \n**");
 
 //-------------rightAlignment-------------
 let rightAlignment = lib.rightAlignment;
