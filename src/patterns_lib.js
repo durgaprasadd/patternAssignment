@@ -17,8 +17,8 @@ const generateAlternateRectangle = function(width,height){
   return rectangle.join("\n");
 }
 
-const hollowLinesGenerator = function(height,width){
-  let noOfHollowLines = Math.max(0,height-2);
+const hollowLinesGenerator = function(noOfLines,width){
+  let noOfHollowLines = Math.max(0,noOfLines-2);
   let noOfHollowSpaces = Math.max(0,width-2);
   let leftBorder = generateLine("*")( 1 % (width+1))
   let rightBorder = generateLine("*")( 1 % width || 0 );
@@ -62,7 +62,7 @@ let createUpperHalf = lib.createUpperHalfOfDiamond;
 let createLowerHalf = lib.createLowerHalfOfDiamond;
 let joinSpaces = lib.joinSpaces;
 
-const filledPatternCreator = function(height){
+const generateFilledDiamond = function(height){
   let width = Math.ceil(height/2);
   height = width*2-1;
   let ones = new Array(width).fill(1);
@@ -73,7 +73,7 @@ const filledPatternCreator = function(height){
   return diamondStars.map(joinSpaces(height)).join("\n");
 }
 
-const hollowPatternCreator = function(height){
+const generateHollowDiamond = function(height){
   height = Math.ceil(height/2)*2-1;
   let topline = createTopLineOfDiamond(height);
   let middleLine = createMiddleLineOfDiamond(height);
@@ -84,7 +84,7 @@ const hollowPatternCreator = function(height){
   return diamond.map(joinSpaces(height)).join("\n");
 }
 
-const angledPatternCreator = function(height){
+const generateAngledDiamond = function(height){
   height = Math.ceil(height/2)*2-1;
   let topline = createTopLineOfDiamond(height);
   let middleLine = createMiddleLineOfDiamond(height);
@@ -99,8 +99,8 @@ const angledPatternCreator = function(height){
 const generateDiamond = function(diamondDetails){
   let pattern = diamondDetails.patternType;
   let height = diamondDetails.width;
-  let diamondFunctions = {filled:filledPatternCreator, hollow:hollowPatternCreator,
-    angled:angledPatternCreator}
+  let diamondFunctions = {filled:generateFilledDiamond, hollow:generateHollowDiamond,
+    angled:generateAngledDiamond}
   let diamond = diamondFunctions[pattern](height);
   return diamond;
 }
@@ -111,15 +111,15 @@ let makeCounter = lib.makeCounter;
 let createTriangle = lib.createTriangle;
 let reverseString = lib.reverseString;
 
-const leftAlignment = function(height){
+const generateLeftTriangle = function(height){
   let ones = new Array(height).fill(1);
   let series = ones.map(makeCounter(1));
   let triangle = series.map(createTriangle(height));
   return triangle;
 }
 
-const rightAlignment = function(height){
-  let triangle = leftAlignment(height);
+const generateRightTriangle = function(height){
+  let triangle = generateLeftTriangle(height);
   return triangle.map(reverseString);
 }
 
@@ -127,12 +127,12 @@ const rightAlignment = function(height){
 const generateTriangle = function(triangleDetails){
   let pattern = triangleDetails.patternType;
   let height = triangleDetails.width;
-  let triangleFunctions = {right:rightAlignment, left:leftAlignment};
+  let triangleFunctions = {right:generateRightTriangle, left:generateLeftTriangle};
   let triangle = triangleFunctions[pattern](height);
   return triangle.join("\n");
 }
 
 module.exports = { generateFilledRectangle, generateAlternateRectangle, generateHollowRectangle,
-  generateDiamond, generateTriangle, generateRectangle, leftAlignment, rightAlignment,
-  filledPatternCreator, hollowPatternCreator, angledPatternCreator
+  generateDiamond, generateTriangle, generateRectangle, generateLeftTriangle, generateRightTriangle,
+  generateFilledDiamond, generateHollowDiamond, generateAngledDiamond
 }

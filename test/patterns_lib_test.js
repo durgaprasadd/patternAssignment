@@ -56,42 +56,42 @@ assert.deepEqual(generateTriangle({patternType:"right",width:2}),expectedOutput)
 expectedOutput = "    *\n   **\n  ***\n ****\n*****"
 assert.deepEqual(generateTriangle({patternType:"right",width:5}),expectedOutput);
 
-//--------filledPatternCreator--------
-let filledPatternCreator = lib.filledPatternCreator;
+//--------generateFilledDiamond--------
+let generateFilledDiamond = lib.generateFilledDiamond;
 
-assert.deepEqual(filledPatternCreator(1,"*"),"*");
-assert.deepEqual(filledPatternCreator(3,"*")," * \n***\n * ");
-assert.deepEqual(filledPatternCreator(4,"*")," * \n***\n * ");
+assert.deepEqual(generateFilledDiamond(1,"*"),"*");
+assert.deepEqual(generateFilledDiamond(3,"*")," * \n***\n * ");
+assert.deepEqual(generateFilledDiamond(4,"*")," * \n***\n * ");
 
-//---------hollowPatternCreator-------
-let hollowPatternCreator = lib.hollowPatternCreator;
+//---------generateHollowDiamond-------
+let generateHollowDiamond = lib.generateHollowDiamond;
 
-assert.deepEqual(hollowPatternCreator(2,"*"),"*");
-assert.deepEqual(hollowPatternCreator(1,"*"),"*");
-assert.deepEqual(hollowPatternCreator(4,"*")," * \n* *\n * ");
+assert.deepEqual(generateHollowDiamond(2,"*"),"*");
+assert.deepEqual(generateHollowDiamond(1,"*"),"*");
+assert.deepEqual(generateHollowDiamond(4,"*")," * \n* *\n * ");
 
-//------------angledPatternCreator---------
-let angledPatternCreator = lib.angledPatternCreator;
+//------------generateAngledDiamond---------
+let generateAngledDiamond = lib.generateAngledDiamond;
 
-assert.deepEqual(angledPatternCreator(0,"*"),"");
-assert.deepEqual(angledPatternCreator(1,"*"),"*");
-assert.deepEqual(angledPatternCreator(3,"*")," * \n* *\n * ");
-assert.deepEqual(angledPatternCreator(5,"*"),"  *  \n / \\ \n*   *\n \\ / \n  *  ");
+assert.deepEqual(generateAngledDiamond(0,"*"),"");
+assert.deepEqual(generateAngledDiamond(1,"*"),"*");
+assert.deepEqual(generateAngledDiamond(3,"*")," * \n* *\n * ");
+assert.deepEqual(generateAngledDiamond(5,"*"),"  *  \n / \\ \n*   *\n \\ / \n  *  ");
 
 
-//-------------leftAlignment--------------
-let leftAlignment = lib.leftAlignment;
+//-------------generateLeftTriangle--------------
+let generateLeftTriangle = lib.generateLeftTriangle;
 
-assert.deepEqual(leftAlignment(0),[]);
-assert.deepEqual(leftAlignment(1),["*"]);
-assert.deepEqual(leftAlignment(2),["* ","**"]);
+assert.deepEqual(generateLeftTriangle(0),[]);
+assert.deepEqual(generateLeftTriangle(1),["*"]);
+assert.deepEqual(generateLeftTriangle(2),["* ","**"]);
 
-//-------------rightAlignment-------------
-let rightAlignment = lib.rightAlignment;
+//-------------generateRightTriangle-------------
+let generateRightTriangle = lib.generateRightTriangle;
 
-assert.deepEqual(rightAlignment(0),[]);
-assert.deepEqual(rightAlignment(1),["*"]);
-assert.deepEqual(rightAlignment(2),[" *","**"]);
+assert.deepEqual(generateRightTriangle(0),[]);
+assert.deepEqual(generateRightTriangle(1),["*"]);
+assert.deepEqual(generateRightTriangle(2),[" *","**"]);
 
 
 console.log("all tests are passed!");
